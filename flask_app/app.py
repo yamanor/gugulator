@@ -44,15 +44,13 @@ def index():
         x2 = random.randint(x2maxlow,x2maxup)
 
         if random.randint(0,1) == 0:
-            tmp = x1
-            x1 = x2
-            x2 = tmp
-        
+            x1, x2 = x2, x1
+
         calc_str = "{0} x {1}".format(x1, x2)
 
         if check_dubs and calc_str in dubs:
             continue
-        
+
         dubs.append(calc_str)
         result = x1 * x2
         data['calcs'].append({'x1':x1,'x2':x2, 'result':result})
@@ -72,14 +70,10 @@ def set_min_max():
     x2maxup = int(request.form.get('x2maxup'))
 
     if x1maxup < x1maxlow:
-        tmp = x1maxup
-        x1maxup = x1maxlow
-        x1maxlow = tmp
+        x1maxup, x1maxlow = x1maxlow, x1maxup
 
     if x2maxup < x2maxlow:
-        tmp = x2maxup
-        x2maxup = x2maxlow
-        x2maxlow = tmp
+        x2maxup, x2maxlow = x2maxlow, x2maxup
 
     session['x1maxlow'] = x1maxlow
     session['x1maxup'] = x1maxup
@@ -94,7 +88,7 @@ def get_int(v, backup):
         return backup
 
 def is_int(s):
-    try: 
+    try:
         int(s)
         return True
     except ValueError:

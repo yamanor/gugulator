@@ -8,10 +8,10 @@
         input.result-input {font-size: 20px; width: 44px}
         table.calcs td {padding: 0px 10px 0px 10px; text-align: right}
         input.submit {font-size: 20px; margin: 10px auto; width:100px}
+        input.refresh {font-size: 20px; margin: 10px auto; width:100px; display: none}
         div.timer {float:left; width:40px; padding: 10px; border: 1px solid #000000}
         .correct {background-color: green}
         .wrong {background-color: red}
-        .refresh {display: none}
         .pointer {cursor:pointer}
     </style>
     <script src="{{url_for('static', filename='jquery-3.4.1.min.js')}}"></script>
@@ -29,7 +29,7 @@
             var sec = (allsec % 60);
             sec = (sec < 10 ? '0' : '') + sec
             $('#timer').text(min + ':' + sec);
-        }, 1000); 
+        }, 1000);
     </script>
     <div class="range">
         <form id="max" name="max" method="post" action="/set_min_max">
@@ -108,7 +108,7 @@
                 {% for calc in data.calcs|batch(3) %}
                 <tr>
                     {% for vals in calc %}
-                    
+
                     <td>{{vals.x1}} x {{vals.x2}} = <input type="text" id="calc{{calc_num.num}}" name="result-input" class="result-input" size="3"/>
                         <input id="result_calc{{calc_num.num}}" type="hidden" value="{{vals.result}}"/>
                     </td>
@@ -120,7 +120,7 @@
                     <td></td>
                     <td>
                         <input id="submit" type="button" value="Submit" class="submit"/>
-                        <a id="refresh" class="refresh" href="/">Restart</a>
+                        <input id="refresh" type="button" value="Restart" class="refresh"/>
                     </td>
                     <td></td>
                 </tr>
@@ -142,13 +142,18 @@
                             $(this).prop('title', result);
                         }
 
-                        $(this).addClass('pointer');   
-                        
+                        $(this).addClass('pointer');
+
                     });
                     $(this).hide();
+
+                    $('#refresh').click(function() {
+                      window.location = '/';
+                    });
+
                     $('#refresh').show();
                 });
-            </script>  
+            </script>
     </div>
 
 </body>
