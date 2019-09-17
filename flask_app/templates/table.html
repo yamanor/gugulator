@@ -1,0 +1,263 @@
+<html>
+    <head>
+        <style>
+            body {font-family: Arial, Helvetica, sans-serif; font-size: 20px}
+            .container {float:left; margin: 20px; width:680px; padding: 10px;}
+            table.math-table td {padding: 10px; text-align: right; cursor: pointer;}
+            table.math-table td.htop {font-weight:bold; border-bottom: 1px solid #000000}
+            table.math-table td.hleft {font-weight:bold; border-right: 1px solid #000000}
+            table.math-table td.result:hover {background-color: green; font-weight: bold}
+            div.result {float:left; width:340px; padding: 280px 10px; font-weight: bold; font-size: 50px}
+        </style>
+        <script src="{{url_for('static', filename='jquery-3.4.1.min.js')}}"></script>
+    </head>
+    <body>
+        <div class="container">
+            <table class="math-table">
+                    
+                    <tbody>
+                    <tr>
+                    <td class="htop"></td>
+                    <td class="htop">0</td>
+                    <td class="htop">1</td>
+                    <td class="htop">2</td>
+                    <td class="htop">3</td>
+                    <td class="htop">4</td>
+                    <td class="htop">5</td>
+                    <td class="htop">6</td>
+                    <td class="htop">7</td>
+                    <td class="htop">8</td>
+                    <td class="htop">9</td>
+                    <td class="htop">10</td>
+                    <td class="htop">11</td>
+                    <td class="htop">12</td>
+                    </tr>
+                    <tr>
+                    <td class="hleft">0</td>
+                    <td class="result">0</td>
+                    <td class="result">0</td>
+                    <td class="result">0</td>
+                    <td class="result">0</td>
+                    <td class="result">0</td>
+                    <td class="result">0</td>
+                    <td class="result">0</td>
+                    <td class="result">0</td>
+                    <td class="result">0</td>
+                    <td class="result">0</td>
+                    <td class="result">0</td>
+                    <td class="result">0</td>
+                    <td class="result">0</td>
+                    </tr>
+                    <tr>
+                    <td class="hleft">1</td>
+                    <td class="result">0</td>
+                    <td class="result">1</td>
+                    <td class="result">2</td>
+                    <td class="result">3</td>
+                    <td class="result">4</td>
+                    <td class="result">5</td>
+                    <td class="result">6</td>
+                    <td class="result">7</td>
+                    <td class="result">8</td>
+                    <td class="result">9</td>
+                    <td class="result">10</td>
+                    <td class="result">11</td>
+                    <td class="result">12</td>
+                    </tr>
+                    <tr>
+                    <td class="hleft">2</td>
+                    <td class="result">0</td>
+                    <td class="result">2</td>
+                    <td class="result">4</td>
+                    <td class="result">6</td>
+                    <td class="result">8</td>
+                    <td class="result">10</td>
+                    <td class="result">12</td>
+                    <td class="result">14</td>
+                    <td class="result">16</td>
+                    <td class="result">18</td>
+                    <td class="result">20</td>
+                    <td class="result">22</td>
+                    <td class="result">24</td>
+                    </tr>
+                    <tr>
+                    <td class="hleft">3</td>
+                    <td class="result">0</td>
+                    <td class="result">3</td>
+                    <td class="result">6</td>
+                    <td class="result">9</td>
+                    <td class="result">12</td>
+                    <td class="result">15</td>
+                    <td class="result">18</td>
+                    <td class="result">21</td>
+                    <td class="result">24</td>
+                    <td class="result">27</td>
+                    <td class="result">30</td>
+                    <td class="result">33</td>
+                    <td class="result">36</td>
+                    </tr>
+                    <tr>
+                    <td class="hleft">4</td>
+                    <td class="result">0</td>
+                    <td class="result">4</td>
+                    <td class="result">8</td>
+                    <td class="result">12</td>
+                    <td class="result">16</td>
+                    <td class="result">20</td>
+                    <td class="result">24</td>
+                    <td class="result">28</td>
+                    <td class="result">32</td>
+                    <td class="result">36</td>
+                    <td class="result">40</td>
+                    <td class="result">44</td>
+                    <td class="result">48</td>
+                    </tr>
+                    <tr>
+                    <td class="hleft">5</td>
+                    <td class="result">0</td>
+                    <td class="result">5</td>
+                    <td class="result">10</td>
+                    <td class="result">15</td>
+                    <td class="result">20</td>
+                    <td class="result">25</td>
+                    <td class="result">30</td>
+                    <td class="result">35</td>
+                    <td class="result">40</td>
+                    <td class="result">45</td>
+                    <td class="result">50</td>
+                    <td class="result">55</td>
+                    <td class="result">60</td>
+                    </tr>
+                    <tr>
+                    <td class="hleft">6</td>
+                    <td class="result">0</td>
+                    <td class="result">6</td>
+                    <td class="result">12</td>
+                    <td class="result">18</td>
+                    <td class="result">24</td>
+                    <td class="result">30</td>
+                    <td class="result">36</td>
+                    <td class="result">42</td>
+                    <td class="result">48</td>
+                    <td class="result">54</td>
+                    <td class="result">60</td>
+                    <td class="result">66</td>
+                    <td class="result">72</td>
+                    </tr>
+                    <tr>
+                    <td class="hleft">7</td>
+                    <td class="result">0</td>
+                    <td class="result">7</td>
+                    <td class="result">14</td>
+                    <td class="result">21</td>
+                    <td class="result">28</td>
+                    <td class="result">35</td>
+                    <td class="result">42</td>
+                    <td class="result">49</td>
+                    <td class="result">56</td>
+                    <td class="result">63</td>
+                    <td class="result">70</td>
+                    <td class="result">77</td>
+                    <td class="result">84</td>
+                    </tr>
+                    <tr>
+                    <td class="hleft">8</td>
+                    <td class="result">0</td>
+                    <td class="result">8</td>
+                    <td class="result">16</td>
+                    <td class="result">24</td>
+                    <td class="result">32</td>
+                    <td class="result">40</td>
+                    <td class="result">48</td>
+                    <td class="result">56</td>
+                    <td class="result">64</td>
+                    <td class="result">72</td>
+                    <td class="result">80</td>
+                    <td class="result">88</td>
+                    <td class="result">96</td>
+                    </tr>
+                    <tr>
+                    <td class="hleft">9</td>
+                    <td class="result">0</td>
+                    <td class="result">9</td>
+                    <td class="result">18</td>
+                    <td class="result">27</td>
+                    <td class="result">36</td>
+                    <td class="result">45</td>
+                    <td class="result">54</td>
+                    <td class="result">63</td>
+                    <td class="result">72</td>
+                    <td class="result">81</td>
+                    <td class="result">90</td>
+                    <td class="result">99</td>
+                    <td class="result">108</td>
+                    </tr>
+                    <tr>
+                    <td class="hleft">10</td>
+                    <td class="result">0</td>
+                    <td class="result">10</td>
+                    <td class="result">20</td>
+                    <td class="result">30</td>
+                    <td class="result">40</td>
+                    <td class="result">50</td>
+                    <td class="result">60</td>
+                    <td class="result">70</td>
+                    <td class="result">80</td>
+                    <td class="result">90</td>
+                    <td class="result">100</td>
+                    <td class="result">110</td>
+                    <td class="result">120</td>
+                    </tr>
+                    <tr>
+                    <td class="hleft">11</td>
+                    <td class="result">0</td>
+                    <td class="result">11</td>
+                    <td class="result">22</td>
+                    <td class="result">33</td>
+                    <td class="result">44</td>
+                    <td class="result">55</td>
+                    <td class="result">66</td>
+                    <td class="result">77</td>
+                    <td class="result">88</td>
+                    <td class="result">99</td>
+                    <td class="result">110</td>
+                    <td class="result">121</td>
+                    <td class="result">132</td>
+                    </tr>
+                    <tr>
+                    <td class="hleft">12</td>
+                    <td class="result">0</td>
+                    <td class="result">12</td>
+                    <td class="result">24</td>
+                    <td class="result">36</td>
+                    <td class="result">48</td>
+                    <td class="result">60</td>
+                    <td class="result">72</td>
+                    <td class="result">84</td>
+                    <td class="result">96</td>
+                    <td class="result">108</td>
+                    <td class="result">120</td>
+                    <td class="result">132</td>
+                    <td class="result">144</td>
+                    </tr>
+                    </tbody>
+            </table>
+            <script>
+                function whichChild(elem){
+                    var  i= 0;
+                    while((elem=elem.previousSibling)!=null) ++i;
+                    return i;
+                }
+
+                $("table.math-table td.result").hover(function() {
+                    var x1 = parseInt($(this).parent().children(':first-child').text());
+                    var x2 = parseInt($(this).parent().children().index($(this))) - 1;
+                                        
+                    var result = x1 * x2;
+                    $('#result').text(x1 + " x " + x2 + " = " + result);
+                });
+            </script>
+        </div>
+        <div id="result" class="result"></div>
+    </body>
+</html>

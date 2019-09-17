@@ -1,0 +1,156 @@
+<html>
+
+<head>
+    <style>
+        body {font-family: Arial, Helvetica, sans-serif; font-size: 20px}
+        div.container {margin: 10px auto; width: 440px; padding: 20px 20px 0px 20px; border: 1px solid #000000}
+        div.range {float:right; height: 60px; padding: 10px; border: 1px solid #000000}
+        input.result-input {font-size: 20px; width: 44px}
+        table.calcs td {padding: 0px 10px 0px 10px; text-align: right}
+        input.submit {font-size: 20px; margin: 10px auto; width:100px}
+        div.timer {float:left; width:40px; padding: 10px; border: 1px solid #000000}
+        .correct {background-color: green}
+        .wrong {background-color: red}
+        .refresh {display: none}
+        .pointer {cursor:pointer}
+    </style>
+    <script src="{{url_for('static', filename='jquery-3.4.1.min.js')}}"></script>
+</head>
+
+<body>
+    <div id="timer" class="timer">0:00</div>
+    <script>
+        var interval = null;
+        var start = Date.now();
+        interval = setInterval(function() {
+            var delta = Date.now() - start;
+            var allsec = Math.floor(delta / 1000);
+            var min = Math.floor(allsec / 60);
+            var sec = (allsec % 60);
+            sec = (sec < 10 ? '0' : '') + sec
+            $('#timer').text(min + ':' + sec);
+        }, 1000); 
+    </script>
+    <div class="range">
+        <form id="max" name="max" method="post" action="/set_min_max">
+            Range Settings<br />
+            <select id="x1maxlow" name="x1maxlow">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select>
+            <select id="x1maxup" name="x1maxup">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select>
+            x
+            <select id="x2maxlow" name="x2maxlow">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select>
+            <select id="x2maxup" name="x2maxup">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select>
+            <input type="submit" value="Submit"/>
+            <br />
+            <a href="/table" style="font-size:12px" target="_blank">View table</a>
+        </form>
+        <script>
+            document.getElementById('x1maxlow').selectedIndex = '{{data.x1maxlowIdx}}';
+            document.getElementById('x1maxup').selectedIndex = '{{data.x1maxupIdx}}';
+            document.getElementById('x2maxlow').selectedIndex = '{{data.x2maxlowIdx}}';
+            document.getElementById('x2maxup').selectedIndex = '{{data.x2maxupIdx}}';
+        </script>
+    </div>
+    <div class="container">
+            <table class="calcs">
+                {% set calc_num = {'num' : 0} %}
+                {% for calc in data.calcs|batch(3) %}
+                <tr>
+                    {% for vals in calc %}
+                    
+                    <td>{{vals.x1}} x {{vals.x2}} = <input type="text" id="calc{{calc_num.num}}" name="result-input" class="result-input" size="3"/>
+                        <input id="result_calc{{calc_num.num}}" type="hidden" value="{{vals.result}}"/>
+                    </td>
+                    {% if calc_num.update({'num' : calc_num.num + 1}) %} {% endif %}
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td></td>
+                    <td>
+                        <input id="submit" type="button" value="Submit" class="submit"/>
+                        <a id="refresh" class="refresh" href="/">Restart</a>
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+            <script>
+                $('#submit').click(function() {
+                    clearInterval(interval);
+                    $('.result-input').each(function() {
+                        var submitted_result = $(this).val();
+                        var tid = '#result_' + $(this).attr('id');
+                        var result = $(tid).val();
+
+                        if (result == submitted_result) {
+                            $(this).removeClass('wrong');
+                            $(this).addClass('correct');
+                        } else {
+                            $(this).removeClass('correct');
+                            $(this).addClass('wrong');
+                            $(this).prop('title', result);
+                        }
+
+                        $(this).addClass('pointer');   
+                        
+                    });
+                    $(this).hide();
+                    $('#refresh').show();
+                });
+            </script>  
+    </div>
+
+</body>
+
+</html>
